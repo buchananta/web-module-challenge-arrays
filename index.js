@@ -107,11 +107,21 @@ Hint: You can use .splice() for this
 
 */
 
+function removeFlavorByNamewithFilter(flavors, flavorToDel) {
+  return flavors.filter(element => !(element == flavorToDel));
+}
+console.log('###########################################')
+console.log(removeFlavorByName(originalFlavors, "Chocolate"));
+
+//apparantly I'm not supposed to use .filter, so here's another implementation:
 function removeFlavorByName(flavors, flavorToDel) {
-  return flavors.filter(element => !element.includes(flavorToDel));
+  for (let i = 0; i < flavors.length; i++) {
+    if (flavors[i] == flavorToDel) flavors.splice(i,1)
+  }
+  return flavors;
 }
 
-console.log(removeFlavorByName(originalFlavors, "Eggnog"));
+
 
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
 
