@@ -107,12 +107,11 @@ Hint: You can use .splice() for this
 
 */
 
-function removeFlavorByName(/*code here*/){
-
-    /*code here*/
-
+function removeFlavorByName(flavors, flavorToDel) {
+  return flavors.filter(element => !element.includes(flavorToDel));
 }
 
+console.log(removeFlavorByName(originalFlavors, "Eggnog"));
 
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
 
@@ -122,11 +121,35 @@ Your function should accept:
 
 and should return a new array that is identical to the old array. You can name the new array however you'd like. */
 
-function copy(/*code here*/){
+function copy(initialArr, newArr){
+  newArr = [...initialArr];
+  console.log(newArr);  // the new array is made, but poofs the
+  return newArr;        // second it leaves the function
+}                       // the only way I can think to actually
+                        // deliver, is to copy each element one
+                        // at a time. Thus, copy2.
+                        // why you would write a function like this
+                        // rather than just do:
+                        //      newArr = [...initialArr]; ??????
 
-    /*code here*/
-
+function copy2(initialArr, newArr){
+  newArr.length = 0; //reset in case it already contained something
+  for(let i = 0; i < initialArr.length; i++) {
+    newArr.push(initialArr[i]);
+  }
+  return newArr;
 }
+//actually, I just realized you can push multiple elements! so
+// This will work!
+function copy3(initialArr, newArr){
+  newArr.length = 0;
+  newArr.push(...initialArr);
+  return newArr;
+}
+
+let x = [5,5,5,5,5,5];
+copy3([1,2,3,4],x);
+console.log(x);
 
 /* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
 
@@ -143,13 +166,19 @@ DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 
 hint - you can use the .includes method to help you solve this */
 
-function filterByWord(/*code here*/){
-
-    /*code here*/
-
+function filterByWordUsingFilter(arr, word){
+  const filteredArray = arr.filter(element => element.includes(word));
+  return filteredArray;
+}
+//Oh, I cheated and used the .filter method.
+function filterByWord(arr, word) {
+  const filteredArray = [];
+  for(let i = 0; i < arr.length; i++)
+    if (arr[i].includes(word)) filteredArray.push(arr[i]);
+  return filteredArray;
 }
 
-
+console.log(filterByWord(originalFlavors, "Chocolate"));
 
 /* 🧁🍦🍨 STRETCH 🍨🍦🍫*/ 
 
@@ -163,11 +192,10 @@ and should return the average number of words per item in the array.
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
 
-function getAverageWordLength(/*code here*/){
+function getAverageWordLength(arrOfWords){
 
-    /*code here*/
 
-}
+console.log(getAverageWordLength(originalFlavors));
 
 
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
