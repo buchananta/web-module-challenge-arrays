@@ -110,7 +110,7 @@ Hint: You can use .splice() for this
 function removeFlavorByNamewithFilter(flavors, flavorToDel) {
   return flavors.filter(element => !(element == flavorToDel));
 }
-console.log('###########################################')
+
 console.log(removeFlavorByName(originalFlavors, "Chocolate"));
 
 //apparantly I'm not supposed to use .filter, so here's another implementation:
@@ -153,7 +153,7 @@ function copy2(initialArr, newArr){
 // This will work!
 function copy3(initialArr, newArr){
   newArr.length = 0;
-  newArr.push(...initialArr);
+  newArr.push(...initialArr); //expand initialArr into arguments
   return newArr;
 }
 
