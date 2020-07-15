@@ -192,9 +192,25 @@ and should return the average number of words per item in the array.
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
 
+//I feel like this is two distinct problems, count number of words in a string. And then add them up from an entire array, giving the average.
+//so, TWO functions.
+function numberOfWords(word) {
+  if (word == '') return 0; //no characters, means no words
+  let result = 1;  //first word is implicit
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === ' ') 
+      result += 1;
+  }
+  return result;
+}
+
 function getAverageWordLength(arrOfWords){
-
-
+  wordCount = 0
+  for (let i = 0; i < arrOfWords.length; i++) {
+    wordCount += numberOfWords(arrOfWords[i]);
+  }
+  return wordCount / arrOfWords.length;
+}
 console.log(getAverageWordLength(originalFlavors));
 
 
@@ -279,8 +295,14 @@ var regionalFlavors = ["Pink Bubblegum",
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"]
 
-function getRandomFlavors(/*code here*/){
 
-    /*code here*/
-
+function getRandomFlavors(amount, ...arrsOfFlavors){
+  let flavors = arrsOfFlavors.flat();
+  const result = [];
+  while (result.length < amount) {
+    let randChoice = Math.floor(Math.random() * amount);
+    result.push(flavors.splice(randChoice,1));
+  }
+  return result;
 }
+console.log(getRandomFlavors(31, newFlavors, seasonalFlavors, regionalFlavors));
